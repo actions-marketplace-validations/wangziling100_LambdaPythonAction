@@ -2,6 +2,7 @@
 
 echo "ci start..."
 echo "check configeration"
+
 if [ -f config.yaml ]; then
     cp config.yaml /workspace
 else
@@ -20,9 +21,8 @@ else
 fi
 old_dir=`pwd`
 cd /workspace
+cd $1
 bash script/fill_template.sh
 bash script/rename.sh
-a=$(ls)
-echo "$a"
 make ci
 cd $old_dir
