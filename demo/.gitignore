@@ -243,3 +243,12 @@ $RECYCLE.BIN/
 */build/*
 
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
+
+# custom
+.env
+clean.sh
+create_user.sh
+del_sec.sh
+gen_encrypted.py
+new_sec.sh
+**/policy/*

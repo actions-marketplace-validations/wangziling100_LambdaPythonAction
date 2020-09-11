@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lambda template
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: {{.Timeout}}
+    Runtime: python3.8
+        Tracing: Active # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
+        Environment:
+            Variables:
+                # Powertools env vars: https://awslabs.github.io/aws-lambda-powertools-python/#environment-variables
+                LOG_LEVEL: INFO
+                POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
+                POWERTOOLS_LOGGER_LOG_EVENT: true
+                POWERTOOLS_METRICS_NAMESPACE: MyServerlessApplication
+                POWERTOOLS_SERVICE_NAME: myService
+
+Resources:
+  {{.AppName}}Function: # your app function
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: {{.AppPath}}/
+      Description: {{.Description}}
+      Layers:
+        - !Ref DependencyLayer
+      Handler: app.{{.Handler}}
+      Runtime: nodejs12.x
+      Events:
+        CatchALL:
+          Type: Api
+          Properties:
+            path: /{{.AppPath}}
+            Method: {{.GetwayMethod}}
+      Environment:
+        Variables:
+          {{- range $index, $value := .Variables}}
+          {{$v := split ":" $value}} {{$v._0}}: "{{$v._1}}"
+          {{- end}}
+      Tags:
+        {{- range $index, $value := .Tags}}
+        {{$v := split ":" $value}} {{$v._0}}: "{{$v._1}}"
+
+  {{AppName}}FunctionAdditionalPermission:
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyName: "root"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Action: "ssm:GetParameters"
+            Resource: "*"
+      Roles:
+        - !Ref {{AppName}}FunctionRole 
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  {{.AppName}}Api:
+    Description: "API Gateway endpoint URL for Prod stage for app function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/{{.AppPath}}/" 
+  {{.AppName}}Function:
+    Description: "App Lambda Function ARN"
+    Value: !GetAtt {{.AppName}}Function.Arn

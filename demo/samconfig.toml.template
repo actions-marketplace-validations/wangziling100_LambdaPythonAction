@@ -1,0 +1,10 @@
+version = {{.Version}}
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "{{.AppPath}}" # your app name
+s3_bucket = "{{.S3}}" 
+s3_prefix = "{{.AppPath}}"
+region = "{{.Region}}"
+confirm_changeset = false
+capabilities = "CAPABILITY_IAM"
