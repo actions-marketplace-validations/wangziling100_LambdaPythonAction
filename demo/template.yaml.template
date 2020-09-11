@@ -25,7 +25,6 @@ Resources:
       CodeUri: {{.AppPath}}/
       Description: {{.Description}}
       Handler: app.{{.Handler}}
-      Runtime: nodejs12.x
       Events:
         CatchALL:
           Type: Api
