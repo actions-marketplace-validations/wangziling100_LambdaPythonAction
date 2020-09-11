@@ -1,15 +1,15 @@
 name: 'lambda-python-template'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  rootDir:  # id of input
+    description: 'root dir where your app locates'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    default: '.'
+#outputs:
+  #time: # id of output
+    #description: 'The time we greeted you'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.rootDir }}
