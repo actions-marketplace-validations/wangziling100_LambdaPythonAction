@@ -32,7 +32,7 @@ Resources:
         CatchALL:
           Type: Api
           Properties:
-            path: /{{.AppPath}}
+            Path: /{{.AppPath}}
             Method: {{.GetwayMethod}}
       Environment:
         Variables:
