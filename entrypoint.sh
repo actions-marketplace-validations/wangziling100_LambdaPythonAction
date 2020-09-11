@@ -2,7 +2,8 @@
 
 echo "ci start..."
 echo "check configeration"
-
+old_dir=`pwd`
+cd $1
 if [ -f config.yaml ]; then
     cp config.yaml /workspace
 else
@@ -14,15 +15,13 @@ if [ -f config.yaml ]; then
 else
     echo "app.py is not defined, a demo will be installed."
 fi
-if [ -f Pipfile ];then
-    cp Pipfile /workspace/demo
+if [ -f requirements.txt ];then
+    cp requirements.txt /workspace/demo
 else
-    echo "Pipfile ist not defined"
+    echo "requirements.txt ist not defined"
     exit -1
 fi
-old_dir=`pwd`
 cd /workspace
-cd $1
 bash script/fill_template.sh
 bash script/rename.sh
 make ci
