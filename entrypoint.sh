@@ -17,7 +17,8 @@ fi
 if [ -f Pipfile ];then
     cp Pipfile /workspace/demo
 else
-    echo "Pipfile ist not defined, a default one will be applied"
+    echo "Pipfile ist not defined"
+    exit -1
 fi
 old_dir=`pwd`
 cd /workspace
