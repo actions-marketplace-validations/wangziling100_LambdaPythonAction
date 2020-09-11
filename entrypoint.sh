@@ -15,7 +15,7 @@ else
     echo "app.py is not defined, a demo will be installed."
 fi
 if [ -f Pipfile ];then
-    cp Pipfile /workspace
+    cp Pipfile /workspace/demo
 else
     echo "Pipfile ist not defined, a default one will be applied"
 fi
