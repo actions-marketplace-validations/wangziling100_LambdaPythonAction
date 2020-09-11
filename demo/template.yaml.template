@@ -24,8 +24,6 @@ Resources:
     Properties:
       CodeUri: {{.AppPath}}/
       Description: {{.Description}}
-      Layers:
-        - !Ref DependencyLayer
       Handler: app.{{.Handler}}
       Runtime: nodejs12.x
       Events:
