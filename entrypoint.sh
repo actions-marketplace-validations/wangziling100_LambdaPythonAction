@@ -22,6 +22,8 @@ else
     exit -1
 fi
 cd /workspace
+a=$(ls)
+echo $a
 bash script/fill_template.sh
 bash script/rename.sh
 make ci
