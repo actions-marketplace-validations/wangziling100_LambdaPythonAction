@@ -1,11 +1,12 @@
 #!/bin/sh -l
 
-a=$(ls /github_workspace)
+a=$(ls /workspace)
 b=$(ls)
 echo "Hello $1"
+cp README.md /workspace
 echo "-----------"
 echo "all: $b"
-echo "github workspace: $a"
+echo "action workspace: $a"
 echo "-----------"
 time=$(date)
 echo ::set-output name=time::$time
