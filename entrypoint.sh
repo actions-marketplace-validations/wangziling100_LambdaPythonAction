@@ -22,5 +22,7 @@ old_dir=`pwd`
 cd /workspace
 bash script/fill_template.sh
 bash script/rename.sh
+a=$(ls)
+echo "$a"
 make ci
 cd $old_dir
