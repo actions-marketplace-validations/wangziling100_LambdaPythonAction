@@ -16,7 +16,7 @@ session = boto3.Session()
 @metrics.log_metrics(capture_cold_start_metric=True)
 @logger.inject_lambda_context
 @tracer.capture_lambda_handler
-def lambda_handler(event, context):
+def handler(event, context):
     """
         AWS Lambda handler
         Parameters

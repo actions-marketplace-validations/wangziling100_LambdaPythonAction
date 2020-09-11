@@ -13,10 +13,10 @@ if [ -f config.yaml ]; then
 else
     echo "app.py is not defined, a demo will be installed."
 fi
-if [ -f requirements.txt ];then
-    cp requirements.txt /workspace
+if [ -f Pipfile ];then
+    cp Pipfile /workspace
 else
-    echo "requirements.txt ist not defined, a default one will be applied"
+    echo "Pipfile ist not defined, a default one will be applied"
 fi
 old_dir=`pwd`
 cd /workspace
