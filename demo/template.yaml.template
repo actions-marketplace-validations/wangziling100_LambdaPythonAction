@@ -8,15 +8,15 @@ Globals:
   Function:
     Timeout: {{.Timeout}}
     Runtime: python3.8
-        Tracing: Active # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
-        Environment:
-            Variables:
-                # Powertools env vars: https://awslabs.github.io/aws-lambda-powertools-python/#environment-variables
-                LOG_LEVEL: INFO
-                POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
-                POWERTOOLS_LOGGER_LOG_EVENT: true
-                POWERTOOLS_METRICS_NAMESPACE: MyServerlessApplication
-                POWERTOOLS_SERVICE_NAME: myService
+    Tracing: Active # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
+    Environment:
+      Variables:
+        # Powertools env vars: https://awslabs.github.io/aws-lambda-powertools-python/#environment-variables
+        LOG_LEVEL: INFO
+        POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
+        POWERTOOLS_LOGGER_LOG_EVENT: true
+        POWERTOOLS_METRICS_NAMESPACE: MyServerlessApplication
+        POWERTOOLS_SERVICE_NAME: myService
 
 Resources:
   {{.AppName}}Function: # your app function
