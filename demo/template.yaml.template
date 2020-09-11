@@ -42,6 +42,7 @@ Resources:
       Tags:
         {{- range $index, $value := .Tags}}
         {{$v := split ":" $value}} {{$v._0}}: "{{$v._1}}"
+        {{- end}}
 
   {{.AppName}}FunctionAdditionalPermission:
     Type: "AWS::IAM::Policy"
