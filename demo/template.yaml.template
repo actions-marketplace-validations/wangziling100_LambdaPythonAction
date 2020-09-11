@@ -43,7 +43,7 @@ Resources:
         {{- range $index, $value := .Tags}}
         {{$v := split ":" $value}} {{$v._0}}: "{{$v._1}}"
 
-  {{AppName}}FunctionAdditionalPermission:
+  {{.AppName}}FunctionAdditionalPermission:
     Type: "AWS::IAM::Policy"
     Properties:
       PolicyName: "root"
