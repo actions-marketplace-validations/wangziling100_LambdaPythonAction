@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM python:alpine3.12
+FROM python:3.8-alpine3.12
 RUN apk add --no-cache build-base curl bash &&\
     mkdir /workspace && \
     mkdir /github_workspace && \
